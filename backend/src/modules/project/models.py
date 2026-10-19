@@ -20,7 +20,6 @@ class Project(Base):
     file_path: Mapped[str] = mapped_column(String)
     file_size_mb: Mapped[float] = mapped_column(Float, nullable=True)
     duration_seconds: Mapped[float] = mapped_column(Float, nullable=True)
-
     status: Mapped[str] = mapped_column(String(50), default="uploaded")
 
     created_at: Mapped[datetime] = mapped_column(

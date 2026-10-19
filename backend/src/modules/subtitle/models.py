@@ -17,7 +17,6 @@ class SubtitleTrack(Base):
     )
 
     language: Mapped[str] = mapped_column(String(50))
-
     track_type: Mapped[str] = mapped_column(String(50), default="original")
 
     project: Mapped[Project] = relationship(back_populates="subtitle_tracks")
@@ -36,7 +35,6 @@ class SubtitleSegment(Base):
 
     start_time: Mapped[float] = mapped_column(Float)
     end_time: Mapped[float] = mapped_column(Float)
-
     text: Mapped[str] = mapped_column(Text)
 
     track: Mapped[SubtitleTrack] = relationship(back_populates="segments")
