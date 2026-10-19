@@ -31,8 +31,9 @@ class RefreshTokenRequest(BaseModel):
 
 
 class UserResponse(BaseModel):
-    user_id: int
+    id: int
     email: EmailStr
+    name: str
 
     class Config:
         from_attributes = True
@@ -44,6 +45,7 @@ class UserLogin(BaseModel):
 
 
 class UserRegistration(BaseModel):
+    name: str = Field(min_length=1, max_length=50)
     email: EmailStr
     password: str = Field(min_length=8, max_length=100)
 

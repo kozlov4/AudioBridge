@@ -129,7 +129,7 @@ async def reset_password(request: ResetPasswordRequest, session: AsyncSession):
         )
 
     hashed_pwd = hash_password(request.new_password)
-    user.hash_password = (
+    user.hashed_password = (
         hashed_pwd.decode("utf-8") if isinstance(hashed_pwd, bytes) else hashed_pwd
     )
 
@@ -161,7 +161,8 @@ async def register_user(
 
     new_user = User(
         email=user_in.email,
-        hash_password=safe_hash,
+        hashed_password=safe_hash,
+        name=user_in.name,
         is_active=False,
     )
 
@@ -256,7 +257,7 @@ async def user_login(
             detail="Incorrect email or password",
         )
 
-    if not validate_password(user_in.password, user.hash_password.encode("utf-8")):
+    if not validate_password(user_in.password, user.hashed_password.encode("utf-8")):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password",
